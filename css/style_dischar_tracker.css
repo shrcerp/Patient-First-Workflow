@@ -1,0 +1,799 @@
+* {
+
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  /* keep the global clamp as requested */
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  border-radius: 5px;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 480px;
+  margin: 0 auto;
+  overflow-x: hidden;
+  padding: 0 10px;
+  /* Add consistent padding */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  /* Remove horizontal padding */
+  gap: 18px;
+  flex-wrap: nowrap;
+  width: 100%;
+  /* Full width */
+  max-width: 350px;
+  /* Match card width */
+  margin: 0 auto;
+  /* Center align */
+}
+
+.header h1 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: #000;
+}
+
+.search-container {
+  display: flex;
+  flex-grow: 1;
+  gap: 6px;
+}
+
+.search-box {
+  flex-grow: 1;
+  padding: 8px 12px;
+  font-size: 12px;
+  border: 1px solid rgba(0, 143, 197, 0.25);
+  border-radius: 21px;
+  outline: none;
+  width: 100%;
+  min-width: 125px;
+  color: rgba(0, 143, 197, 0.25);
+}
+
+.sh-button {
+  background-color: white;
+  border: 1px solid rgba(0, 143, 197, 0.25);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: #008fc5;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  padding: 0;
+}
+
+.tabs-section {
+  background: rgba(0, 143, 197, 0.25);
+  border-radius: 5px;
+  padding-top: 16px;
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.main-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.main-tab {
+  padding: 8px 8px;
+  text-align: center;
+  background: #e3f2fd;
+  border: 1px solid #ddd;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  min-width: 160px;
+  height: 33px;
+}
+
+.main-tab:first-child {
+  border-radius: 8px 0 0 8px;
+  color: #008fc5;
+  background: white;
+}
+
+.main-tab:last-child {
+  border-radius: 0 8px 8px 0;
+  color: #008fc5;
+  background: white;
+  border-left: none;
+}
+
+.main-tab.active {
+  background: #e3f2fd;
+  color: #008fc5;
+  border: 1px solid #fff;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 2px;
+  right: 5px;
+  background: #e31936;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.sub-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 15px;
+  padding: 10px;
+  /* Add horizontal padding to match tabs-section */
+}
+
+.sub-tab {
+  font-size: 11px;
+  color: #666;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.253);
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.sub-tab.active {
+  color: #fff;
+  background-color: #008fc5;
+  font-weight: 500;
+}
+
+.sub-tab .badge {
+  background: #f44336;
+  color: white;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  font-size: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -2px;
+  font-weight: bold;
+  position: absolute;
+  top: 160px;
+}
+
+/* Ensure content container centers all cards consistently */
+.content {
+  padding: 16px 0;
+  /* Remove horizontal padding */
+  height: auto;
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* Full width */
+  max-width: 350px;
+  /* Match other components */
+  margin: 0 auto;
+  /* Center align */
+}
+
+.patient-card {
+  background: white;
+  border-radius: 5px;
+  padding: 12px;
+
+  margin-bottom: 12px;
+  border: 1px solid #008fc5;
+  width: 100%;
+  /* Full width of container */
+  box-sizing: border-box;
+  max-width: 350px;
+  /* Consistent max width */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 0;
+  /* Remove auto margins */
+  margin-right: 0;
+}
+
+.patient-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.patient-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.patient-avatar {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #008fc5;
+  font-size: 18px;
+  border: 1px solid rgba(0, 143, 197, 0.25);
+}
+
+.patient-details h3 {
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.patient-id {
+  font-size: 10px;
+  color: #008fc5;
+}
+
+.status-badge {
+  padding: 6px 6px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-badge.ongoing {
+  color: #9fa617;
+}
+
+.status-badge.expected-delay {
+  color: #ff9800;
+}
+
+.status-badge.delay {
+  color: #e31936;
+}
+
+.patient-details-section {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 14px;
+  font-size: 10px;
+}
+
+.detail-item1 {
+  display: flex;
+  gap: 8px;
+}
+
+.detail-item2 {
+  display: flex;
+  gap: 2px;
+  margin-left: 30px;
+}
+
+.detail-label {
+  color: #333;
+  min-width: 47px;
+}
+
+.detail-value {
+  color: #333;
+  font-weight: 500;
+}
+
+.corner-fold {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(-45deg,
+      transparent 0%,
+      transparent 45%,
+      #e6c200 45%,
+      #e6c200 60%,
+      transparent 60%,
+      transparent 100%);
+  z-index: 10;
+  border-top-left-radius: 5px;
+  pointer-events: none;
+}
+
+.appointments {
+  display: flex;
+  gap: 30px;
+  justify-content: flex-start;
+  position: relative;
+  align-items: flex-start;
+  /* overflow-x: auto;
+            overflow-y: visible; */
+  padding-bottom: 10px;
+  width: 100%;
+  /* -webkit-overflow-scrolling: touch; */
+  /* scroll-behavior: smooth; */
+  margin: 0;
+}
+
+.appointment {
+  flex: 0 0 auto;
+  text-align: center;
+  padding: 15px 15px;
+  position: relative;
+  z-index: 3;
+  min-width: 110px;
+}
+
+.appointment h4 {
+  font-size: 8px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.appointment-date {
+  font-size: 7px;
+  color: #666;
+  line-height: 1.2;
+}
+
+.appointment-time {
+  font-size: 7px;
+  color: #402424;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+/* Ensure appointment-card has same dimensions and positioning as patient-card */
+.appointment-card {
+  background: white;
+  border-radius: 5px;
+  padding: 12px;
+  padding-left: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #008fc5;
+  width: 100%;
+  /* Full width of container */
+  box-sizing: border-box;
+  max-width: 350px;
+  /* Match other components */
+  display: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  max-height: 130px;
+  margin-left: 0;
+  /* Remove auto margins */
+  margin-right: 0;
+  overflow: visible !important;
+}
+
+.appointment-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-card .patient-header {
+  margin-bottom: -5px;
+}
+
+.close-button {
+  display: none;
+}
+
+/* Horizontal connecting lines using pseudo-elements */
+.appointment:not(:last-child) .appointment-icon::after {
+  content: "";
+  position: absolute;
+  left: calc(100% + -10px);
+  top: 35%;
+  transform: translateY(-50%);
+  width: 65px;
+  height: 1px;
+  background-color: lightgrey;
+  z-index: 1;
+}
+
+/* Dots at the end of each line */
+.appointment:not(:last-child) .appointment-icon::before {
+  content: "";
+  position: absolute;
+  left: calc(100% + 55px);
+  top: 35%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: lightgrey;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* Special styling for completed step (Initiate) - only first dot is green */
+.appointment.initials .appointment-icon::before {
+  box-shadow: -67px 0 0 0 forestgreen;
+}
+
+/* Special styling for completed step (Initiate) */
+.appointment.initials h4 {
+  color: forestgreen;
+}
+
+.appointment.initials .appointment-icon::before {
+  background-color: lightgrey;
+}
+
+/* Adjust the appointments section within the detailed card */
+.appointment-card .appointments {
+  padding: 8px 8px;
+  margin-bottom: 8px;
+  overflow-x: auto !important;
+  /* Enable horizontal scrolling */
+  overflow-y: visible !important;
+  /* Keep vertical overflow visible for connectors */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
+  scroll-behavior: smooth;
+  /* Hide scrollbar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.appointment-card * {
+  overflow-x: visible !important;
+}
+
+.appointment-card .appointments::-webkit-scrollbar {
+  display: none;
+}
+
+/* Make appointment items more compact */
+.appointment-card .appointment {
+  padding: 12px 10px;
+  /* Reduce padding */
+  min-width: 85px;
+  /* Reduce minimum width */
+}
+
+/* Adjust appointment text sizes for better fit */
+.appointment-card .appointment h4 {
+  font-size: 8px;
+  /* Slightly smaller */
+  margin-bottom: 1px;
+}
+
+.appointment-card .appointment-date {
+  font-size: 7px;
+  /* Slightly smaller */
+}
+
+#detailed-card .appointments,
+#detailed-card .appointment,
+#detailed-card .appointment-icon,
+.appointment-card .appointments,
+.appointment-card .appointment,
+.appointment-card .appointment-icon {
+  overflow: visible;
+  /* keeps connectors visible */
+}
+
+/* Anchor pseudo-elements to the icon wrapper to position reliably */
+#detailed-card .appointment-icon,
+.appointment-card .appointment-icon {
+  position: relative;
+  z-index: 2;
+}
+
+.appointment-card .appointment-icon img {
+  width: 35px !important;
+  height: 35px !important;
+  margin-top: -6px !important;
+  /* margin-left: -10px !important; */
+}
+
+/* ================================================================ */
+
+.search-container .dropdown-list {
+  border: 1px solid black;
+  margin-left: 75px;
+  margin-top: 33px;
+  position: absolute;
+  z-index: 9999;
+  background-color: rgba(6, 90, 120, 0.91);
+  border-radius: 8px;
+  width: 100px;
+  text-align: center;
+  line-height: 30px;
+  border: none;
+}
+
+.search-container .dropdown-list li a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Spinner Styles */
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  text-align: center;
+  color: #066a90;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #066a90;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 10px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.content {
+  transition: opacity 0.3s ease;
+}
+
+/* dropdown filter  */
+#wardDropdown {
+  border: 1px solid rgba(0, 143, 197, 0.25);
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.header h1 {
+  font-size: 12px !important;
+}
+
+.header {
+  gap: 8px !important;
+}
+
+.container-section {
+  position: relative;
+  max-width: 350px;
+  margin: 0 auto;
+  background: #fff;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.filter-btn {
+  padding: 0px 3px;
+  border-radius: 6px;
+  border: none;
+  background: #fff;
+  color: #066a90;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.patient-table th,
+.patient-table td {
+  border: 1px solid #ddd;
+  padding: 2px;
+  text-align: center;
+}
+
+.patient-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.patient-table tr:nth-child(even) {
+  background-color: rgba(0, 143, 197, 0.25);
+  padding: 8px;
+}
+
+.patient-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.appointment.delay .appointment-icon::after,
+.appointment.delay .appointment-icon::before {
+  background-color: #e31936 !important;
+}
+
+.appointment.expected-delay .appointment-icon::after,
+.appointment.expected-delay .appointment-icon::before {
+  background-color: #ff9800 !important;
+}
+
+.appointment.ongoing .appointment-icon::after,
+.appointment.ongoing .appointment-icon::before {
+  background-color: #3bb149 !important;
+}
+
+/* default iniated color  */
+.appointment .appointment-icon::after,
+.appointment .appointment-icon::before {
+  background-color: #3bb149 !important;
+}
+
+/* agar stage complete hia  */
+.appointment.from-completed .appointment-icon::before,
+.appointment.from-completed .appointment-icon::after {
+  background-color: #3bb149 !important;
+}
+
+
+/* Drawer Panel ======================*/
+.filter-panel {
+  position: absolute;
+  top: 0;
+  left: -360px;
+  width: 350px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  transition: left 0.3s ease;
+  z-index: 99;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.filter-panel.active {
+  left: 0;
+}
+
+.filter-panel h3 {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px;
+}
+
+.filter-panel h3 span {
+  font-size: 13px;
+}
+
+.close-btn {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Headings */
+.filter-headings .filter-option {
+  padding: 8px 10px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.filter-headings .filter-option:hover {
+  background: #ddd;
+}
+
+/* Options */
+.filter-options {
+  margin-left: 10px;
+  position: relative;
+}
+
+.option-list {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.option-item {
+  padding: 6px 10px;
+  background: #fafafa;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  border: 1px solid rgba(0, 145, 197, 0.61);
+  margin-top: 4px;
+}
+
+.option-item:hover {
+  background: #eee;
+}
+
+.option-item.active {
+  background: rgba(0, 143, 197, 0.25);
+  color: #fff;
+}
+
+.apply-btn {
+  width: 100%;
+  padding: 7px;
+  margin-top: 15px;
+  background: #008fc5;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* end drwaer pannel================= */
+
+.tooltip-popup{
+  font-size: 8px;
+  /* font-weight: 600; */
+  /* color: #737373; */
+  background-color: yellow !important;
+  /* border-radius: 5px; */
+}
+
+
+.static-tooltip {
+  background-color: yellow !important;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
+  margin-bottom: 79px;
+  white-space: pre-wrap;
+  bottom: -20px;
+  font-size: 8px;
+  position: absolute;
+  left: 60px;
+  z-index: 9999;
+  display: none;
+  width: 80px;
+}
+
+[data-set="Pharmacy"] .icon-cercul {
+  border: 2px solid #4caf50 !important;
+}
+
+[data-set="Radiology"] .icon-cercul {
+  border: 2px solid #4caf50 !important;
+}
+
+[data-set="Lab"] .icon-cercul {
+  border: 2px solid #4caf50 !important;
+}
